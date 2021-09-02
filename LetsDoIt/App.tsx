@@ -8,13 +8,17 @@
  * @format
  */
 
-import React from 'react';
+import React from 'react'; 
 import {
+  Alert,
+  Button,
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   useColorScheme,
   View,
 } from 'react-native';
@@ -62,18 +66,35 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const alertOne = () => Alert.alert(
+                    "Alert",
+                    "Alert Options",
+                    [
+                      {
+                        text : 'Ok',
+                        onPress: () => console.log("Clicked on  Alert Ok")
+                      },
+                      {
+                        text : 'Cancle',
+                        onPress: () => console.log("Clicked on  Alert Cancle")
+
+                      }
+                    ]
+  )
+  
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
+        style={backgroundStyle}> 
+        <Image style={styles.image} source={{uri:'https://picsum.photos/200/300'}}/>
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-            
+           <Button title="Promt" color="orange" onPress={() => Alert.prompt("Hi", "How are you", text => console.log(text))}/> 
+           <Button title="Alert" color="green" onPress={alertOne}/>
           <Section title="Intro">
             Hi this is  <Text style={styles.highlight}>Rama</Text>. It is my first React Native app
           </Section>
@@ -84,7 +105,7 @@ const App = () => {
             Visual Studio, XCode, and Android Studios
           </Section>
           <Section title="Thank you">
-            Please be connect for more updates 
+            Please be connect for more updates. 
           </Section>
           {/* <LearnMoreLinks /> */}
         </View>
@@ -110,6 +131,12 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  image: {
+    width: 450,
+    height: 300
+  }
 });
 
 export default App;
+
+
